@@ -1,1 +1,58 @@
-/*Schrijf hier jouw eigen CSS!*/
+/*Guide Borders*/
+.red-border {
+    border: 2px dashed red
+}
+
+.green-border {
+    border: 2px dashed green
+}
+
+.blue-border {
+    border: 2px dashed blue
+}
+
+.orange-border {
+    border: 2px dashed orange
+}
+
+.purple-border {
+    border: 2px dashed purple
+}
+
+.brown-border {
+    border: 2px dashed brown
+}
+
+.pink-border {
+    border: 2px dashed deeppink
+}
+
+.yellow-border {
+    border: 2px dashed yellow
+}
+
+.everything-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    gap: 20px;
+}
+
+.header {
+    display: flex;
+}
+
+.nav {
+    display: flex;
+    gap: 10px;
+}
+
+.main-container {
+    display: flex;
+    gap: 10px;
+    flex-flow: wrap;
+    max-width: 1045px;
+}
