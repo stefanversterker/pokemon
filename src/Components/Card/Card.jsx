@@ -6,14 +6,9 @@ import {useState, useEffect} from 'react';
 
 function Card({pokeName, pokeMovesAmount, pokeWeightAmount, pokeImage, children}) {
 
-  const [data, setData] = useState([]);
+  const [data, setData] = useState(null);
   const [error, toggleError] = useState(false);
   const [loading, toggleLoading] = useState(true);
-  const [name, setName] = useState('');
-  const [moves, setMoves] = useState(0);
-  const [weight, setWeight] = useState(0);
-  const [image, setImage] = useState('');
-  const [abilities, setAbilities] = useState('');
 
   async function catchPokemon() {
 
@@ -21,12 +16,6 @@ function Card({pokeName, pokeMovesAmount, pokeWeightAmount, pokeImage, children}
       const response = await axios.get(`https://pokeapi.co/api/v2/pokemon/${pokeName}`);
 
       setData(response.data);
-      setName(response.data.name);
-      setMoves(response.data.moves.length);
-      setWeight(response.data.weight);
-      setImage(response.data.sprites.front_default);
-      setAbilities(response.data.abilities);
-      /*console.log(response.data);*/
 
     } catch (error) {
       console.error(error);
@@ -43,10 +32,10 @@ function Card({pokeName, pokeMovesAmount, pokeWeightAmount, pokeImage, children}
 
   return (
     <article className="card">
-      <h3>{name}</h3>
-      <div className="poke-image pink-border"><img src={image} alt=""/></div>
-      <h4>Moves: {moves}</h4>
-      <h4>Weight: {weight}</h4>
+      <h3>{data?.name}</h3>
+      <div className="poke-image pink-border"><img src={data?.sprites?.front_default} alt={data?.name}/></div>
+      <h4>Moves: {data?.moves?.length}</h4>
+      <h4>Weight: {data?.weight}</h4>
       <h4>Abilities:</h4>
       <ul className="ability-list">
         {data?.abilities?.map((a) => (
