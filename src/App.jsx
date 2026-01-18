@@ -12,6 +12,7 @@ function App() {
   const [data, setData] = useState([]);
   const [offset, setOffset] = useState(0);
   const [error, toggleError] = useState(false);
+  const controller = new AbortController()
 
 
 
@@ -29,6 +30,15 @@ function App() {
       toggleError(true);
     }
   }
+
+  //Ik betwijfel of ik het unmount effect goed heb geîmplementeerd. Voor mijn gevoel ben ik blind dingen aan het overtypen zonder dat ik het echt snap.
+  useEffect(() => {
+    void catchPokemon();
+    return function unmount() {
+      controller.abort();
+      console.log('het request is afgebroken');
+    };
+  }, []);
 
   useEffect(() => {
     void catchPokemon();
