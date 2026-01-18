@@ -3,16 +3,21 @@ import Card from './Components/Card/Card.jsx';
 import axios from 'axios';
 import {useState, useEffect} from 'react';
 import Button from './Components/Button/Button.jsx';
+import ErrorMessage from './Components/ErrorMessage/ErrorMessage.jsx';
+
 
 
 function App() {
 
   const [data, setData] = useState([]);
   const [offset, setOffset] = useState(0);
+  const [error, toggleError] = useState(false);
 
 
 
   async function catchPokemon() {
+
+    toggleError(false);
 
     try {
       const response = await axios.get(`https://pokeapi.co/api/v2/pokemon/?offset=${offset}&limit=20`);
@@ -21,9 +26,7 @@ function App() {
 
     } catch (error) {
       console.error(error);
-      /*toggleError(true);*/
-    } finally {
-      /*toggleLoading(false);*/
+      toggleError(true);
     }
   }
 
@@ -43,13 +46,15 @@ function App() {
         <Button buttonText="next" onClick={() => {setOffset(offset + 20);}} disabled={data?.next === null}/>
       </nav>
       <main className="main-container green-border">
-        <ul>
+
+        {error ? <ErrorMessage/> :
+          <ul>
           {data?.results?.map((p) => (
             <li key={p.url}>
               <Card pokeName={p.name}></Card>
             </li>
           ))}
-        </ul>
+        </ul>}
       </main>
     </div>
   );
