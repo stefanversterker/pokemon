@@ -1,0 +1,17 @@
+.ability-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #bfbfbf;
+    height: 40px;
+    width: 100%;
+    border-radius: 5px;
+    list-style-type: none;
+}
+
+.card ul {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    width: 100%
+}
